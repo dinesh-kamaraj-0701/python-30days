@@ -1,0 +1,4 @@
+Day 1 reads
+The official Python Tutorial, section 3: “An Informal Introduction to Python” (docs.python.org/3/tutorial/introduction.html). It’s short and precise. Read 3.1.1 (numbers) and 3.1.2 (text) today. Skip anything you don’t understand and flag it to me
+
+Day 2 readsThe official Python Tutorial, section 4.1 to 4.5 (docs.python.org/3/tutorial/controlflow.html): if, for, range(), and break/continue. Read 4.1 to 4.4 today (about 20 minutes). Don’t memorize it. Read it so you recognize the patterns when you code.

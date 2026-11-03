@@ -1,0 +1,51 @@
+git config --global user.name "dinesh-kamaraj-0701"
+git config --global user.email "dineshjeev7@gmail.com"
+
+
+git remote add origin https://github.com/dinesh-kamaraj-0701/python-30days.git
+
+
+git init 
+Expected: Initialized empty Git repository in ...python-30days/.git/
+Why: this creates a hidden folder named .git that holds the entire history of your project. Until you run this, Git isn’t watching your folder at all. You only do this once per project.
+
+git status
+
+git add .
+The dot means “everything in this folder (except what .gitignore blocks)”.
+
+git commit -m "Day 1: setup and first script"
+Expected: a few lines saying 2 files changed and the names of your files.
+
+Why: a commit is a permanent snapshot with a message. You can return to this exact state at any time, and the message tells future you (and employers) what changed. Good messages are short and specific, such as Day 3: add string cleaning exercises. Bad ones are update or asdf.
+
+If you get “Author identity unknown”: you skipped Step 2. Do it now and rerun the commit.
+
+git branch -M main
+a branch is a line of history. main is the standard name for the primary one, and it matches GitHub’s default. This command makes sure yours is called main
+
+git remote add origin https://github.com/YOUR_USERNAME/python-30days.git --one time
+Replace the URL with the one you copied.
+
+Why: a “remote” is a bookmark pointing to a repo on the internet. origin is just the conventional nickname for it. Without this step, Git has no idea where to upload.
+
+
+git push -u origin main
+
+he first time, a window may pop up asking you to sign in to GitHub:
+
+Click Sign in with your browser.
+Your browser opens. Log in to GitHub if asked and click Authorize.
+Return to VS Code. The push continues.
+
+Expected: lines ending with Branch 'main' set up to track 'origin/main'.
+
+Why: push uploads your commits to GitHub. The -u flag links your local main to the remote main, so from tomorrow you can type just git push. Windows saves your login securely (this is done by Git Credential Manager, which comes with Git), so you won’t be asked again.
+
+
+Daily
+
+git status                          # what changed?
+git add .                           # stage it
+git commit -m "Day 2: loops exercises"   # snapshot it
+git push                            # upload it

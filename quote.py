@@ -1,24 +1,30 @@
+GST_RATE = 0.12
+CHILD_PRICE_FACTOR = 0.5
 
-package_name=input("ENTER NAME: ")
-print(f"Hi {package_name} !!!")
-number_of_adults=input("ENTER number of adults: ") 
-number_of_children=input("ENTER number of Children: ")
-nights=input("ENter numbe of nights: ")
-adult_price=input("ENTER adult price: ")
-tot_adult_price=int(adult_price)* int(number_of_adults)
-child_price=(float(adult_price)*0.5)* int(number_of_children)
-discount_percentage=input("Enter discount % : ")
-GST_1=0.12
-subtotal=tot_adult_price+child_price
-discount=subtotal*(float(discount_percentage)/100)
-total_dis_amt=(subtotal-discount)
-total=total_dis_amt+(total_dis_amt*GST_1)
-tot_night=total*int(nights)
-print("==================================================")
-print(f"QUOTE FOR {package_name}")                 
-print(f"SUBTOTAL IS : {subtotal:,.3f}")
-print(f"Discount amount is : {discount:,.3f}")
-print(f"Tot discounted amount is : {total_dis_amt:,.3f}")
-print(f"Total amount for per night is : {total:,.3f}    inc of GST")
-print(f"Total amount for total night is : {tot_night:,.3f}    inc of GST")
-print("==================================================")
+# --- Inputs ---
+customer_name = input("Customer name: ")
+package_name = input("Package name: ")
+adults = int(input("Number of adults: "))
+children = int(input("Number of children: "))
+nights = int(input("Number of nights: "))
+adult_price = float(input("Adult price per night: "))
+discount_percent = float(input("Discount %: "))
+
+# --- Calculations ---
+child_price = adult_price * CHILD_PRICE_FACTOR
+subtotal = (adults * adult_price + children * child_price) * nights
+discount = subtotal * discount_percent / 100
+taxable_amount = subtotal - discount
+gst = taxable_amount * GST_RATE
+grand_total = taxable_amount + gst
+
+# --- Output ---
+print("=" * 40)
+print(f"QUOTE FOR {customer_name} - {package_name}")
+print("=" * 40)
+print(f"Subtotal  : Rs. {subtotal:,.2f}")
+print(f"Discount  : Rs. {discount:,.2f}")
+print(f"Taxable   : Rs. {taxable_amount:,.2f}")
+print(f"GST (12%) : Rs. {gst:,.2f}")
+print(f"Total     : Rs. {grand_total:,.2f}")
+print("=" * 40)
