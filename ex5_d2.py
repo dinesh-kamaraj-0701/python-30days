@@ -1,65 +1,53 @@
-##Taxi fare engine. Ask for distance in km and whether it’s night (y/n). 
-# Pricing: first 5 km at Rs. 60 per km, 
-# next 15 km at Rs. 45 per km, anything beyond 20 km at Rs. 35 per km. 
-# Add a 20% night surcharge if applicable. 
-# Print an itemized breakdown by slab.
-##Hint: this is a tiered calculation, much like tax slabs. 
-# Compute how many km fall into each slab using min() and max(), 
-# or if statements. Sketch it on paper with 27 km first.
+# --- Constants ---
+SLAB1_END_KM = 5
+SLAB2_END_KM = 20
+SLAB1_RATE = 60
+SLAB2_RATE = 45
+SLAB3_RATE = 35
+NIGHT_SURCHARGE = 0.20
 
-#constant
+# --- Inputs ---
+while True:
+    distance_km = int(input("Distance in km: "))
+    if distance_km >= 1:
+        break
+    print("Distance must be at least 1 km.")
 
-total_fare=0
-ikm=1
-five_km_price=0
-five_twenty_km=0
-above_twenty=0
-night_five_km=60+(60*.2)
-night_fif_km=45+(45*.2)
-night_twenty_km=35+(35*.2)
+while True:
+    is_night = input("Night travel? (y/n): ").lower()
+    if is_night in ("y", "n"):
+        break
+    print("Please enter y or n.")
 
+# --- Calculation ---
+slab1_fare = 0
+slab2_fare = 0
+slab3_fare = 0
 
-#input
-distance=int(input("Enter the distance : "))
-night_ind=input("Is it night travel (y/n): ")
+for km in range(1, distance_km + 1):
+    if km <= SLAB1_END_KM:
+        slab1_fare += SLAB1_RATE
+    elif km <= SLAB2_END_KM:
+        slab2_fare += SLAB2_RATE
+    else:
+        slab3_fare += SLAB3_RATE
 
+base_fare = slab1_fare + slab2_fare + slab3_fare
+if is_night == "y":
+    surcharge = base_fare * NIGHT_SURCHARGE
+else:
+    surcharge = 0
+total_fare = base_fare + surcharge
 
-
-#calculation
-if night_ind=='n':
-    while ikm<=distance:
-        if ikm<=5:
-            total_fare=total_fare+60
-            ikm+=1
-            five_km_price=five_km_price+60
-        elif ikm<=20:
-            total_fare=total_fare+45
-            ikm+=1
-            five_twenty_km=five_twenty_km+45
-        elif ikm>20:
-            total_fare=total_fare+35
-            ikm+=1
-            above_twenty=above_twenty+35
-        else:
-            break
-elif night_ind=='y':
-    while ikm<=distance:
-            if ikm<=5:
-                total_fare=total_fare+night_five_km
-                ikm+=1
-                five_km_price=five_km_price+night_five_km
-            elif ikm<=20:
-                total_fare=total_fare+night_fif_km
-                ikm+=1
-                five_twenty_km=five_twenty_km+night_fif_km
-            elif ikm>20:
-                total_fare=total_fare+night_twenty_km
-                ikm+=1
-                above_twenty=above_twenty+night_twenty_km
-else :
-    print("invalid input")
-#output
-print(f"The total fare for trips is : {total_fare}")
-print(f"The total fare for first five km is: {five_km_price}")
-print(f"The total fare for next 15 five km is: {five_twenty_km}")
-print(f"The total fare above 20 km is: {above_twenty}")
+# --- Output ---
+print("=" * 36)
+print(f"TAXI FARE FOR {distance_km} KM")
+print("=" * 36)
+print(f"Km 1-{SLAB1_END_KM}: Rs. {slab1_fare:,.2f}")
+print(f"Km {SLAB1_END_KM + 1}-{SLAB2_END_KM}: Rs. {slab2_fare:,.2f}")
+print(f"Km {SLAB2_END_KM + 1}+: Rs. {slab3_fare:,.2f}")
+print("-" * 36)
+print(f"Base fare : Rs. {base_fare:,.2f}")
+print(f"Night (20%): Rs. {surcharge:,.2f}")
+print(f"Total     : Rs. {total_fare:,.2f}")
+print("=" * 36)
